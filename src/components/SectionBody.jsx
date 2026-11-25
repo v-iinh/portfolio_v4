@@ -42,7 +42,6 @@ export function SectionBody({ id }) {
   );
   return (
     <>
-      <p>I’m looking for a co-op where the software reaches real people.</p>
       <ul className="tp-list">
         <Entry title="Email"><p><a href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a></p></Entry>
         <Entry title="LinkedIn"><p><a href={PROFILE.linkedin} target="_blank" rel="noreferrer">linkedin.com/in/viinh</a></p></Entry>
