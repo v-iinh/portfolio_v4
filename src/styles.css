@@ -222,7 +222,7 @@
 .tp-entry a:hover{background-size:100% 1px}
 .td-page-nav{display:flex;flex-wrap:wrap;justify-content:end;align-items:center;gap:12px 24px;margin-top:calc(var(--gap) * 1.2);text-align:left}
 .td-others{display:flex;flex-wrap:wrap;gap:4px 18px}
-.td-page-nav>button,.td-others button{min-height:44px;padding:0 4px;border:0;background:linear-gradient(var(--ink),var(--ink)) left bottom/0 1px no-repeat;cursor:pointer;font-family:var(--display);font-size:18px;color:var(--soft);border-bottom:1px solid var(--rule);transition:background-size .6s var(--ease),color .6s var(--ease)}
+.td-page-nav>button,.td-others button{min-height:44px;padding:0 4px;border:0;background:linear-gradient(var(--ink),var(--ink)) left bottom/0 1px no-repeat;cursor:pointer;font-family:var(--display);font-size:18px;color:var(--muted);border-bottom:1px solid var(--rule);transition:background-size .6s var(--ease),color .6s var(--ease)}
 .td-page-nav>button:hover,.td-others button:hover{background-size:100% 1px;color:var(--ink)}
 .tp-root button:focus-visible,.tp-root a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
 .td-box:focus-visible{outline-offset:6px}
