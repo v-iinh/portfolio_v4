@@ -10,7 +10,7 @@ export function CelestialWheel({ size = 900, className = "" }) {
     const a = (i / 120) * Math.PI * 2, l = i % 10 === 0 ? 16 : i % 5 === 0 ? 10 : 5;
     ticks.push(`M${(c + Math.cos(a) * R).toFixed(1)} ${(c + Math.sin(a) * R).toFixed(1)}L${(c + Math.cos(a) * (R - l)).toFixed(1)} ${(c + Math.sin(a) * (R - l)).toFixed(1)}`);
   }
-  const words = "VINH TRAN ✦ SOFTWARE ✦ SYSTEMS ✦ BOSTON ✦ NORTHEASTERN ✦ MMXXVI ✦ ";
+  const words = "VINH TRAN ✦ SOFTWARE ✦ SYSTEMS ✦ ENGINEER ✦ RESEARCH ✦ DEVELOPER ✦ ";
   return (
     <svg className={`tp-wheel ${className}`} viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
       <defs><path id={`tp-ring-${size}`} d={`M${c} ${c} m-${R - 34} 0 a${R - 34} ${R - 34} 0 1 1 ${2 * (R - 34)} 0 a${R - 34} ${R - 34} 0 1 1 -${2 * (R - 34)} 0`} /></defs>

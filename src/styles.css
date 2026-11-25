@@ -1,7 +1,9 @@
 /* All styles for the site. Colours are variables at the top of .tp-root. */
 .tp-root{
   color-scheme:dark;
-  --paper:#0A0A0B; --card:#111111; --ink:#B9A36E; --muted:#9A8964; --rule:rgba(200,205,212,.2); --rust:#C8A55A; --gold:#C8A55A;
+  --paper:#0A0A0B; --card:#111111; --rule:rgba(200,205,212,.2); --gold:#C8A55A;
+  /* text, from loudest to quietest: titles, eyebrows, body, italic lines, taglines and links, dates and labels */
+  --ink:#DCC791; --rust:#C8A55A; --body:#C4BCAA; --sub:#B19A66; --soft:#A8A296; --muted:#8F8B82;
   --display:"Cormorant Garamond", "Iowan Old Style", Georgia, serif;
   --text:"EB Garamond", "Iowan Old Style", Georgia, serif;
   --ease:cubic-bezier(.65,0,.35,1); --ease-out:cubic-bezier(.22,1,.36,1);
@@ -32,7 +34,7 @@
 .tp-letters{display:inline-block}
 .tp-letters span{display:inline-block;animation:tp-letter .9s var(--ease-out) both}
 @keyframes tp-letter{from{opacity:0;transform:translateY(.35em);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
-.tp-tag{margin:0;max-width:480px;font-size:clamp(15px,calc(1.1vh + .5vw + 6px),19px);line-height:1.5;color:var(--muted)}
+.tp-tag{margin:0;max-width:480px;font-size:clamp(15px,calc(1.1vh + .5vw + 6px),19px);line-height:1.5;color:var(--soft)}
 .tp-svg{display:block;width:100%;height:100%}
 
 /* engraving draws itself, and the quiet living details */
@@ -138,7 +140,7 @@
 .td-spread.hot .td-sparks svg{opacity:.55;transform:translateY(calc(var(--c) * -.16)) scale(1) rotate(0)}
 .td-spread.hot .td-sparks svg:nth-child(odd){animation:td-spark 2.4s ease-in-out .8s infinite}
 @keyframes td-spark{0%,100%{opacity:.55}50%{opacity:.15}}
-.td-hint{position:absolute;left:0;right:0;bottom:-34px;height:1.5em;margin:0;text-align:center;font-style:italic;font-size:17px;color:var(--muted)}
+.td-hint{position:absolute;left:0;right:0;bottom:-34px;height:1.5em;margin:0;text-align:center;font-style:italic;font-size:17px;color:var(--soft)}
 .td-hint span{position:absolute;left:0;right:0;opacity:0;transform:translateY(4px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .td-hint span.on{opacity:1;transform:none}
 
@@ -178,24 +180,22 @@
 .is-open .td-page-inner>*:nth-child(1){animation-delay:.25s}.is-open .td-page-inner>*:nth-child(2){animation-delay:.3s}.is-open .td-page-inner>*:nth-child(3){animation-delay:.42s}
 .is-open .td-page-inner>*:nth-child(4){animation-delay:.52s}.is-open .td-page-inner>*:nth-child(n+5){animation-delay:.62s}
 .td-page h2{margin:14px 0 0;font-size:clamp(46px,6vw,76px);color:var(--ink)}
-.td-page-tag{margin:18px auto 0;max-width:32rem;font-size:19px;line-height:1.55;color:var(--muted)}
-.tp-lead{margin:40px auto 0;max-width:34rem;font-size:19px;line-height:1.65;color:var(--ink)}
+.td-page-tag{margin:18px auto 0;max-width:32rem;font-size:19px;line-height:1.55;color:var(--soft)}
+.tp-lead{margin:40px auto 0;max-width:34rem;font-size:19px;line-height:1.65;color:var(--body)}
 .tp-list{list-style:none;margin:44px 0 0;padding:0;text-align:left;border-top:1px solid var(--rule)}
 .tp-lead + .tp-list{margin-top:36px}
 .tp-entry{padding:22px 0;border-bottom:1px solid var(--rule)}
 .tp-entry-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 24px}
 .tp-entry h3{margin:0;font-family:var(--display);font-weight:500;font-size:25px;line-height:1.25;color:var(--ink)}
 .tp-entry-meta{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-.tp-entry-sub{margin:4px 0 0!important;font-style:italic;font-size:16px!important;color:var(--muted)}
-.tp-entry p{margin:10px 0 0;font-size:17px;line-height:1.65;color:var(--muted);max-width:60ch}
+.tp-entry-sub{margin:4px 0 0!important;font-style:italic;font-size:16px!important;color:var(--sub)}
+.tp-entry p{margin:10px 0 0;font-size:17px;line-height:1.65;color:var(--body);max-width:60ch}
 .tp-entry a{color:var(--ink);text-decoration:none;background:linear-gradient(currentColor,currentColor) left bottom/0 1px no-repeat;padding-bottom:2px;transition:background-size .6s var(--ease)}
 .tp-entry a:hover{background-size:100% 1px}
 .td-page-nav{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;margin-top:40px;text-align:left}
-.td-back,.td-others button{min-height:44px;padding:0 4px;border:0;background:linear-gradient(var(--ink),var(--ink)) left bottom/0 1px no-repeat;cursor:pointer;font-family:var(--display);font-size:20px;color:var(--ink);border-bottom:1px solid var(--rule);transition:background-size .6s var(--ease),color .6s var(--ease)}
-.td-back:hover,.td-others button:hover{background-size:100% 1px}
 .td-others{display:flex;flex-wrap:wrap;gap:4px 18px}
-.td-others button{font-size:18px;color:var(--muted)}
-.td-others button:hover{color:var(--ink)}
+.td-page-nav>button,.td-others button{min-height:44px;padding:0 4px;border:0;background:linear-gradient(var(--ink),var(--ink)) left bottom/0 1px no-repeat;cursor:pointer;font-family:var(--display);font-size:18px;color:var(--soft);border-bottom:1px solid var(--rule);transition:background-size .6s var(--ease),color .6s var(--ease)}
+.td-page-nav>button:hover,.td-others button:hover{background-size:100% 1px;color:var(--ink)}
 .tp-root button:focus-visible,.tp-root a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:2px}
 .td-box:focus-visible{outline-offset:6px}
 
@@ -238,7 +238,8 @@
 /* ---------- light theme: paper and ink ---------- */
 .tp-root[data-theme="light"]{
   color-scheme:light;
-  --paper:#EEE7D7; --card:#F7F2E7; --ink:#2A2621; --muted:#5F584E; --rule:rgba(42,38,33,.22); --rust:#7A4B3A; --gold:#7A4B3A;
+  --paper:#EEE7D7; --card:#F7F2E7; --ink:#2A2621; --muted:#6A6257; --rule:rgba(42,38,33,.22); --rust:#7A4B3A; --gold:#7A4B3A;
+  --body:#3B362F; --sub:#6E5A43; --soft:#5F584E;
   background-image:
     repeating-linear-gradient(0deg, rgba(42,38,33,.055) 0, rgba(42,38,33,.055) 1px, transparent 1px, transparent 4px),
     radial-gradient(ellipse at 50% 40%, rgba(255,252,244,.75), transparent 65%),
@@ -246,7 +247,6 @@
 }
 [data-theme="light"] .tp-frame,[data-theme="light"] .td-page-frame{outline-color:rgba(42,38,33,.08)}
 [data-theme="light"] .td-backdrop{opacity:.24}
-[data-theme="light"] .tp-entry p{color:#4A443B}
 [data-theme="light"] .tp-sheen{background:linear-gradient(105deg, transparent 40%, rgba(255,250,235,.85) 50%, transparent 60%);mix-blend-mode:soft-light}
 [data-theme="light"] .td-floor{background:radial-gradient(ellipse at 50% 50%, rgba(42,38,33,.3), rgba(42,38,33,0) 70%)}
 [data-theme="light"] .td-lid{background:linear-gradient(90deg,#1E1B18,#332E28 40%,#2A2621 62%,#171512);border-bottom-color:#EFE6D2}
@@ -299,6 +299,31 @@ html[data-theme-motion="close"]::view-transition-new(root){
   animation:td-theme-close 1s cubic-bezier(.65,0,.35,1) both}
 @keyframes td-theme-open{from{clip-path:circle(0 at var(--vx,50%) var(--vy,100%))}to{clip-path:circle(var(--vr,150vmax) at var(--vx,50%) var(--vy,100%))}}
 @keyframes td-theme-close{from{--td-hole:var(--vr,150vmax)}to{--td-hole:0px}}
+
+
+/* the backdrops' own slow motion */
+.bd-turn,.bd-turn-slow,.bd-turn-rev,.bd-rays,.bd-heat,.bd-sway{transform-box:view-box}
+.bd-turn{animation:tp-spin 70s linear infinite}
+.bd-turn-slow{animation:tp-spin 120s linear infinite}
+.bd-turn-rev{animation:tp-spin 95s linear infinite reverse}
+.bd-pulse{transform-box:fill-box;transform-origin:center;animation:bd-pulse 7.2s cubic-bezier(.2,.6,.3,1) infinite}
+@keyframes bd-pulse{0%{transform:scale(1);opacity:0}12%{opacity:.85}100%{transform:scale(6.5);opacity:0}}
+.bd-drift{animation:bd-drift 80s linear infinite}
+@keyframes bd-drift{to{transform:translateX(-1600px)}}
+.bd-flow{animation:bd-flow 22s linear infinite}
+@keyframes bd-flow{to{stroke-dashoffset:-1000}}
+.bd-shoot{opacity:0;animation:bd-shoot 14s cubic-bezier(.4,0,.6,1) infinite}
+@keyframes bd-shoot{0%{opacity:0;transform:translateX(-220px)}2%{opacity:1}9%{opacity:0;transform:translateX(340px)}100%{opacity:0;transform:translateX(340px)}}
+.bd-rays{animation:bd-rays 18s ease-in-out infinite}
+@keyframes bd-rays{0%,100%{transform:rotate(0)}25%{transform:rotate(-1.6deg)}75%{transform:rotate(1.6deg)}}
+.bd-heat{animation:bd-heat 7.8s cubic-bezier(.2,.6,.3,1) infinite}
+@keyframes bd-heat{0%{transform:scale(1);opacity:0}10%{opacity:.8}100%{transform:scale(1.9);opacity:0}}
+.bd-sway{animation:bd-sway 8s ease-in-out infinite}
+@keyframes bd-sway{0%,100%{transform:rotate(0)}25%{transform:rotate(-3deg)}75%{transform:rotate(3deg)}}
+.bd-fall{animation:bd-fall 10s linear infinite}
+@keyframes bd-fall{0%{transform:translateY(-30px);opacity:0}15%{opacity:1}80%{opacity:1}100%{transform:translateY(170px);opacity:0}}
+.calm .bd-turn,.calm .bd-turn-slow,.calm .bd-turn-rev,.calm .bd-drift,.calm .bd-rays,.calm .bd-sway,.calm .bd-fall{animation:none!important;opacity:1}
+.calm .bd-pulse,.calm .bd-heat,.calm .bd-flow,.calm .bd-shoot{display:none}
 
 /* short screens, such as a phone held sideways */
 @media (max-height:600px){

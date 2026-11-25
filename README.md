@@ -24,10 +24,10 @@ On Vercel, use build command `npm run build`; `vercel.json` sets the output dire
 
 ## Where things live
 
-- `src/data/content.js` — all text: your profile, the five cards (label, numeral, arcana, one-line description) and the content of each page (work, projects, courses, skills). Edit this first.
+- `src/data/content.js` — all text: your profile, the five cards (label, numeral, arcana, one-line description), the content of each page (work, projects, courses, skills), and `WHEEL_WORDS`, the words that run around the celestial wheel. Edit this first.
 - `src/App.jsx` — the page itself: the deck box, the spread, hover behaviour, the flip-and-grow into each page, and the sun and moon theme switch. The spread layouts (`FAN` and `ROWS`) are at the top, in card widths.
 - `src/art/cards.jsx` — the five engraved cards (Hermit, Wheel of Fortune, Magician, Star, Sun), and the card back.
-- `src/art/PageBackdrops.jsx` — the muted engraved scene behind each card's page: the Hermit's mountains and lantern, the Wheel's orbits, the Magician's infinity and tools, the Star's sky and water, and the Sun rising over a garden wall.
+- `src/art/PageBackdrops.jsx` — the muted engraved scene behind each card's page, each with its own slow motion: the Hermit's lantern pulsing light over drifting mountain mist, planets travelling the Wheel's orbits, light flowing around the Magician's infinity loop between two turning magic circles, shooting stars over the Star's water, and heat rising off the Sun while its flowers sway.
 - `src/art/TarotBox.jsx` — the engraved deck box.
 - `src/art/shapes.js` and `src/art/EngravingDefs.jsx` — drawing helpers and the shared hatching patterns.
 - `src/components/` — the background and effects: `Heavens` (wheel and moon ring), `ConstellationField` (interactive stars), `Sky` (dust and sparkle trail), `CursorLight` (the light that replaces the pointer), `CelestialWheel`, `Letters` and `SectionBody` (the entries on each card's page).

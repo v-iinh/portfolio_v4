@@ -493,7 +493,7 @@ export default function App() {
           <div className="td-flight-front" aria-hidden="true"><CardFace card={card} uid="fly" /></div>
           <div className="td-flight-back">
             <div className="td-page" style={{ width: to.width, height: to.height }}>
-              <div className="td-page-art" aria-hidden="true" key={`art-${current.id}`}><PageBackdrop id={current.id} /></div>
+              <div className="td-page-art" aria-hidden="true" key={`art-${current.id}`}><PageBackdrop id={current.id} calm={reduce} /></div>
               <div className="td-page-frame" aria-hidden="true" />
               <button id="td-close" className="td-close" onClick={closePage} aria-label="Return the card to the deck"><span /><span /></button>
               <div className="td-page-scroll">
@@ -503,7 +503,7 @@ export default function App() {
                   <p className="td-page-tag">{current.blurb}</p>
                   <SectionBody id={current.id} />
                   <div className="td-page-nav">
-                    <button className="td-back" onClick={closePage}>Back to the deck</button>
+                    <button onClick={closePage}>Close</button>
                     <div className="td-others">
                       {CARDS.filter((c) => c.id !== current.id).map((c) => (
                         <button key={c.id} onClick={() => showSection(c.id)}>{c.label}</button>
