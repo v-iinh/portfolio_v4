@@ -188,7 +188,6 @@
 .td-page h2{margin:14px 0 0;font-size:clamp(46px,6vw,76px);color:var(--ink)}
 .tp-lead{margin:36px auto 0;max-width:34rem;font-size:19px;line-height:1.65;color:var(--muted)}
 .tp-list{list-style:none;margin:44px 0 0;padding:0;text-align:left;border-top:1px solid var(--rule)}
-.tp-lead + .tp-list{margin-top:36px}
 .tp-entry{padding:22px 0;border-bottom:1px solid var(--rule)}
 .tp-entry-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 24px}
 .tp-entry h3{margin:0;font-family:var(--display);font-weight:500;font-size:25px;line-height:1.25;color:var(--ink)}
