@@ -3,7 +3,7 @@
   color-scheme:dark;
   --paper:#0A0A0B; --card:#111111; --rule:rgba(200,205,212,.2); --gold:#C8A55A;
   /* text, from loudest to quietest: titles, eyebrows, body, italic lines, taglines and links, dates and labels */
-  --ink:#AC9D85; --rust:#C8A55A; --body:#AC9D85; --sub:#AC9D85; --soft:#AC9D85; --muted:#AC9D85;
+  --ink:#AC9D85; --rust:#C8A55A; --body:#AC9D85; --sub:#AC9D85; --soft:#AC9D85; --muted:#8F8B82;
   --display:"Cormorant Garamond", "Iowan Old Style", Georgia, serif;
   --text:"EB Garamond", "Iowan Old Style", Georgia, serif;
   --ease:cubic-bezier(.65,0,.35,1); --ease-out:cubic-bezier(.22,1,.36,1);
@@ -190,18 +190,17 @@
 .is-open .td-page-inner>*:nth-child(1){animation-delay:.25s}.is-open .td-page-inner>*:nth-child(2){animation-delay:.3s}.is-open .td-page-inner>*:nth-child(3){animation-delay:.42s}
 .is-open .td-page-inner>*:nth-child(4){animation-delay:.52s}.is-open .td-page-inner>*:nth-child(n+5){animation-delay:.62s}
 .td-page h2{margin:14px 0 0;font-size:clamp(46px,6vw,76px);color:var(--ink)}
-.tp-root:not([data-theme="light"]) .td-page h2{color:var(--gold)}
-.td-page-tag{margin:18px auto 0;max-width:32rem;font-size:19px;line-height:1.55;color:var(--soft)}
+.td-page-tag{margin:18px auto 0;max-width:32rem;font-size:19px;line-height:1.55;color:var(--muted)}
 .tp-lead{margin:40px auto 0;max-width:34rem;font-size:19px;line-height:1.65;color:var(--body)}
 .tp-list{list-style:none;margin:44px 0 0;padding:0;text-align:left;border-top:1px solid var(--rule)}
 .tp-lead + .tp-list{margin-top:36px}
 .tp-entry{padding:22px 0;border-bottom:1px solid var(--rule)}
 .tp-entry-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 24px}
 .tp-entry h3{margin:0;font-family:var(--display);font-weight:500;font-size:25px;line-height:1.25;color:var(--ink)}
-.tp-root:not([data-theme="light"]) .tp-entry h3{color:var(--gold)}
 .tp-entry-meta{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 .tp-entry-sub{margin:4px 0 0!important;font-style:italic;font-size:16px!important;color:var(--sub)}
 .tp-entry p{margin:10px 0 0;font-size:17px;line-height:1.65;color:var(--body);max-width:60ch}
+.tp-root:not([data-theme="light"]) .tp-entry p{color:var(--muted)}
 .tp-entry a{color:var(--ink);text-decoration:none;background:linear-gradient(currentColor,currentColor) left bottom/0 1px no-repeat;padding-bottom:2px;transition:background-size .6s var(--ease)}
 .tp-entry a:hover{background-size:100% 1px}
 .td-page-nav{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;margin-top:40px;text-align:left}
