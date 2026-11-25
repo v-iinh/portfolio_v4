@@ -36,13 +36,13 @@ export function SectionBody({ id }) {
   );
   if (id === "about") return (
     <>
-      <p className="tp-lead">I study computer science at Northeastern, concentrating in systems. Most of my work sits between messy data and the people who depend on it, and I like building things people can walk into.</p>
+      <p>I study computer science at Northeastern, concentrating in systems. Most of my work sits between messy data and the people who depend on it, and I like building things people can walk into.</p>
       <ul className="tp-list">{SKILLS.map(([k, v]) => <Entry key={k} title={k}><p>{v}</p></Entry>)}</ul>
     </>
   );
   return (
     <>
-      <p className="tp-lead">I’m looking for a co-op where the software reaches real people.</p>
+      <p>I’m looking for a co-op where the software reaches real people.</p>
       <ul className="tp-list">
         <Entry title="Email"><p><a href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a></p></Entry>
         <Entry title="LinkedIn"><p><a href={PROFILE.linkedin} target="_blank" rel="noreferrer">linkedin.com/in/viinh</a></p></Entry>
