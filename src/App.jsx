@@ -168,6 +168,9 @@ export default function App() {
   const [page, setPage] = useState(null);   // { id, phase: 'in' | 'open' | 'out', geo }
   const [shown, setShown] = useState(null); // section showing inside the open page
   const [swap, setSwap] = useState("in");
+  const [bgLeaving, setBgLeaving] = useState(null); // the background that fades out while the next one fades in
+  const bgTimer = useRef(0);
+  useEffect(() => () => clearTimeout(bgTimer.current), []);
   const cardRefs = useRef({});
   const flightRef = useRef(null);
   const swapTimer = useRef(0);
@@ -323,6 +326,9 @@ export default function App() {
     clearTimeout(swapTimer.current);
     setSwap("out");
     swapTimer.current = setTimeout(() => {
+      clearTimeout(bgTimer.current);
+      setBgLeaving(shown); // the old scene stays and fades out underneath the new one
+      bgTimer.current = setTimeout(() => setBgLeaving(null), 3000); // safety net; normally removed when its fade ends
       setShown(id); setPage((p) => (p ? { ...p, id } : p)); setSwap("in");
       document.querySelector(".td-page-scroll")?.scrollTo({ top: 0 });
     }, 360);
@@ -488,6 +494,12 @@ export default function App() {
           <div className="td-flight-front" aria-hidden="true"><CardFace card={card} uid="fly" /></div>
           <div className="td-flight-back">
             <div className="td-page" style={{ width: to.width, height: to.height }}>
+              {bgLeaving && bgLeaving !== current.id && (
+                <div className="td-page-art is-leaving" aria-hidden="true" key={`art-${bgLeaving}`}
+                  onAnimationEnd={(e) => { if (e.target === e.currentTarget && e.animationName === "td-art-out") setBgLeaving(null); }}>
+                  <PageBackdrop id={bgLeaving} calm={reduce} />
+                </div>
+              )}
               <div className="td-page-art" aria-hidden="true" key={`art-${current.id}`}><PageBackdrop id={current.id} calm={reduce} /></div>
               <div className="td-page-frame" aria-hidden="true" />
               <button id="td-close" className="td-close" onClick={closePage} aria-label="Return the card to the deck"><span /><span /></button>

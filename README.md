@@ -27,7 +27,7 @@ On Vercel, use build command `npm run build`; `vercel.json` sets the output dire
 - `src/data/content.js` — all text: your profile, the five cards (label, numeral, arcana, one-line description), the content of each page (work, projects, courses, skills). Edit this first.
 - `src/App.jsx` — the page itself: the deck box, the spread, hover behaviour, the flip-and-grow into each page, and the sun and moon theme switch. The spread layouts (`FAN` and `ROWS`) are at the top, in card widths.
 - `src/art/cards.jsx` — the five engraved cards (Hermit, Wheel of Fortune, Magician, Star, Sun), and the card back.
-- `src/art/PageBackdrops.jsx` — the muted engraved scene behind each card's page, each with its own slow motion: the Hermit's lantern pulsing light over drifting mountain mist, planets travelling the Wheel's orbits, light flowing around the Magician's infinity loop between two turning magic circles with orbiting satellites, under light that pours from above and rises from below, shooting stars over the Star's water, and heat rising off the Sun while its flowers sway.
+- `src/art/PageBackdrops.jsx` — the muted engraved scene behind each card's page, each with its own slow motion: the Hermit's lantern pulsing light over drifting mountain mist under an arc of moon phases, planets travelling the Wheel's orbits between turning rims and drifting clouds, light flowing around the Magician's infinity loop between two turning magic circles with orbiting satellites, under light that pours from above and rises from below, shooting stars and a Milky Way over the Star's rippling water, and heat rising off the Sun while clouds drift over and its flowers sway above an ivy-covered wall. Switching between pages crossfades one scene into the next.
 - `src/art/TarotBox.jsx` — the engraved deck box.
 - `src/art/shapes.js` and `src/art/EngravingDefs.jsx` — drawing helpers and the shared hatching patterns.
 - `src/components/` — the background and effects: `Heavens` (wheel and moon ring), `ConstellationField` (interactive stars), `Sky` (dust and sparkle trail), `CursorLight` (the light that replaces the pointer), `CelestialWheel`, `Letters` and `SectionBody` (the entries on each card's page).
@@ -37,6 +37,8 @@ On Vercel, use build command `npm run build`; `vercel.json` sets the output dire
 ## Behaviour worth knowing
 
 - **Light and dark mode:** the sun and moon button on the bottom edge of the frame switches themes. Day opens out of the button in a widening circle; night closes in, with the day shrinking back into the button. This uses View Transitions where the browser has them and a snapshot fallback elsewhere. The choice is saved in the browser, and first-time visitors get their system setting.
+- **The deck box:** the sun on the deck box turns while the box is hovered or focused.
+- **The cards:** five engraved Major Arcana in `src/art/cards.jsx`. Every line draws itself in as the cards come out of the box, and each card's details move only while it is hovered.
 - **Card labels:** once the cards land, a small italic label under each one names the page it opens (the card's `label` in `src/data/content.js`). The label under the hovered card brightens; the others soften.
 - **Opening a card:** the card lifts from exactly where it is drawn, flips and grows to fill the screen, and the page's text fades in once it lands. Each page is one centred column of entries over a muted, full-width engraved scene for that card, and links back to the deck and to the other cards. Closing returns the card to its spot in the spread.
 

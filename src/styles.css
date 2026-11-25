@@ -48,6 +48,23 @@
 .tp-spin-rev{animation:tp-spin 90s linear infinite reverse}
 @keyframes tp-spin{to{transform:rotate(360deg)}}
 .tp-pulse{animation:tp-pulse 4.4s ease-in-out infinite}
+/* the Hermit: the lantern swings from its hook, its glow breathes, mist drifts across the slopes */
+.tp-swing,.tp-glow{transform-box:view-box}
+.tp-swing{animation:tp-swing 4.2s ease-in-out infinite}
+@keyframes tp-swing{0%,100%{transform:rotate(0)}25%{transform:rotate(5deg)}75%{transform:rotate(-5deg)}}
+.tp-glow{animation:tp-glow 3.4s ease-in-out infinite}
+@keyframes tp-glow{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.14);opacity:.65}}
+.tp-mist{animation:tp-mist 5s linear infinite}
+/* the Magician: light flows around the infinity sign; the Sun: birds glide */
+.tp-flow{animation:tp-flow 4.5s linear infinite}
+@keyframes tp-flow{to{stroke-dashoffset:-100}}
+.tp-glide{animation:tp-glide 5s ease-in-out infinite}
+@keyframes tp-glide{0%,100%{transform:translate(0,0)}50%{transform:translate(7px,-4px)}}
+.tp-mist-rev{animation-direction:reverse;animation-duration:7s}
+@keyframes tp-mist{to{transform:translateX(-40px)}}
+/* the box's sun turns while the box is hovered or focused */
+.db-sun{transform-box:view-box;animation:tp-spin 16s linear infinite;animation-play-state:paused}
+.td-box:hover .db-sun,.td-box:focus-visible .db-sun{animation-play-state:running}
 @keyframes tp-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 .tp-twinkle{transform-box:fill-box;transform-origin:center;animation:tp-twinkle 3.6s ease-in-out infinite}
 @keyframes tp-twinkle{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.6) rotate(20deg);opacity:.55}}
@@ -124,8 +141,8 @@
 .has-hover .td-face:not(.lifted) .td-face-art .tp-svg{filter:grayscale(.4) contrast(.85)}
 
 /* the hovered card comes alive: its drawing moves, light follows the pointer, a sheen passes */
-.td-face .tp-spin,.td-face .tp-spin-slow,.td-face .tp-spin-rev,.td-face .tp-pulse,.td-face .tp-twinkle,.td-face .tp-flicker,.td-face .tp-shimmer,.td-face .tp-sway{animation-play-state:paused}
-.td-face.lifted .tp-spin,.td-face.lifted .tp-spin-slow,.td-face.lifted .tp-spin-rev,.td-face.lifted .tp-pulse,.td-face.lifted .tp-twinkle,.td-face.lifted .tp-flicker,.td-face.lifted .tp-shimmer,.td-face.lifted .tp-sway{animation-play-state:running}
+.td-face .tp-spin,.td-face .tp-spin-slow,.td-face .tp-spin-rev,.td-face .tp-pulse,.td-face .tp-twinkle,.td-face .tp-flicker,.td-face .tp-shimmer,.td-face .tp-sway,.td-face .tp-swing,.td-face .tp-glow,.td-face .tp-mist,.td-face .tp-flow,.td-face .tp-glide{animation-play-state:paused}
+.td-face.lifted .tp-spin,.td-face.lifted .tp-spin-slow,.td-face.lifted .tp-spin-rev,.td-face.lifted .tp-pulse,.td-face.lifted .tp-twinkle,.td-face.lifted .tp-flicker,.td-face.lifted .tp-shimmer,.td-face.lifted .tp-sway,.td-face.lifted .tp-swing,.td-face.lifted .tp-glow,.td-face.lifted .tp-mist,.td-face.lifted .tp-flow,.td-face.lifted .tp-glide{animation-play-state:running}
 .td-glare{position:absolute;inset:0;pointer-events:none;opacity:0;mix-blend-mode:soft-light;transition:opacity .6s var(--ease);
   mix-blend-mode:screen;background:radial-gradient(circle at var(--gx,50%) var(--gy,30%), rgba(255,226,160,.22), rgba(255,226,160,0) 50%)}
 .td-face.lifted .td-glare{opacity:1}
@@ -175,20 +192,26 @@
 .td-close span{position:absolute;left:13px;top:21px;width:18px;height:1.3px;background:var(--ink)}
 .td-close span:first-child{transform:rotate(45deg)}.td-close span:last-child{transform:rotate(-45deg)}
 .td-page-scroll{position:absolute;inset:18px;z-index:2;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;scrollbar-width:thin;scrollbar-color:var(--rule) transparent}
-.td-page-art{position:absolute;inset:0;pointer-events:none;animation:tp-fade 1.6s var(--ease) both;
+.td-page-art{position:absolute;inset:0;pointer-events:none;animation:td-art-in 1.2s var(--ease) both;
   -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 20%,rgba(0,0,0,.28) 36%,rgba(0,0,0,.28) 64%,#000 80%,#000 100%);
   mask-image:linear-gradient(90deg,#000 0%,#000 20%,rgba(0,0,0,.28) 36%,rgba(0,0,0,.28) 64%,#000 80%,#000 100%)}
 .td-backdrop{display:block;width:100%;height:100%;opacity:.26}
-.td-page-inner{max-width:640px;margin:0 auto;padding:clamp(56px,11vh,120px) 28px 72px;text-align:center;opacity:0;transition:opacity .25s var(--ease),transform .36s var(--ease)}
+/* switching cards crossfades the scenes: the old one fades out under the new one */
+@keyframes td-art-in{from{opacity:0}to{opacity:1}}
+@keyframes td-art-out{from{opacity:1}to{opacity:0}}
+.td-page-art.is-leaving{animation:td-art-out 1.2s var(--ease) both}
+/* one rhythm for every page: page edge, eyebrow, title, content, entries, navigation */
+.td-page-inner{--gap:40px;max-width:640px;margin:0 auto;padding:clamp(64px,11vh,112px) clamp(20px,4vw,36px) clamp(56px,9vh,88px);text-align:center;opacity:0;transition:opacity .25s var(--ease),transform .36s var(--ease)}
 .is-open .td-page-inner{opacity:1;transition:opacity .8s var(--ease-out) .12s,transform .36s var(--ease)}
 .is-open .td-page-inner.out{opacity:0;transform:translateY(6px);transition:opacity .32s var(--ease),transform .32s var(--ease)}
 .is-open .td-page-inner>*{animation:tp-in .9s var(--ease-out) both}
 .is-open .td-page-inner>*:nth-child(1){animation-delay:.25s}.is-open .td-page-inner>*:nth-child(2){animation-delay:.3s}.is-open .td-page-inner>*:nth-child(3){animation-delay:.42s}
 .is-open .td-page-inner>*:nth-child(4){animation-delay:.52s}.is-open .td-page-inner>*:nth-child(n+5){animation-delay:.62s}
 .td-page h2{margin:14px 0 0;font-size:clamp(46px,6vw,76px);color:var(--ink)}
-.tp-lead{margin:36px auto 0;max-width:34rem;font-size:19px;line-height:1.65;color:var(--muted)}
-.tp-list{list-style:none;margin:44px 0 0;padding:0;text-align:left;border-top:1px solid var(--rule)}
-.tp-entry{padding:22px 0;border-bottom:1px solid var(--rule)}
+.tp-lead{margin:var(--gap) auto 0;max-width:34rem;font-size:19px;line-height:1.65;color:var(--muted)}
+.tp-lead + .tp-list{margin-top:calc(var(--gap) * .8)}
+.tp-list{list-style:none;margin:var(--gap) 0 0;padding:0;text-align:left;border-top:1px solid var(--rule)}
+.tp-entry{padding:24px 0;border-bottom:1px solid var(--rule)}
 .tp-entry-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 24px}
 .tp-entry h3{margin:0;font-family:var(--display);font-weight:500;font-size:25px;line-height:1.25;color:var(--ink)}
 .tp-entry-meta{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
@@ -197,7 +220,7 @@
 .tp-root:not([data-theme="light"]) .tp-entry p{color:var(--muted)}
 .tp-entry a{color:var(--ink);text-decoration:none;background:linear-gradient(currentColor,currentColor) left bottom/0 1px no-repeat;padding-bottom:2px;transition:background-size .6s var(--ease)}
 .tp-entry a:hover{background-size:100% 1px}
-.td-page-nav{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;margin-top:40px;text-align:left}
+.td-page-nav{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;margin-top:calc(var(--gap) * 1.2);text-align:left}
 .td-others{display:flex;flex-wrap:wrap;gap:4px 18px}
 .td-page-nav>button,.td-others button{min-height:44px;padding:0 4px;border:0;background:linear-gradient(var(--ink),var(--ink)) left bottom/0 1px no-repeat;cursor:pointer;font-family:var(--display);font-size:18px;color:var(--soft);border-bottom:1px solid var(--rule);transition:background-size .6s var(--ease),color .6s var(--ease)}
 .td-page-nav>button:hover,.td-others button:hover{background-size:100% 1px;color:var(--ink)}
@@ -205,7 +228,14 @@
 .td-box:focus-visible{outline-offset:6px}
 
 @media (max-width:760px){
-  .td-page-inner{padding:64px 6px 48px}
+  .td-page-inner{--gap:32px;padding:72px 6px 40px}
+  /* the page navigation on phones: the other cards as an even grid of tap targets, Close below */
+  .td-page-nav{flex-direction:column;align-items:stretch;gap:12px}
+  .td-others{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .td-page-nav>button,.td-others button{min-height:48px;padding:0 8px;border:1px solid var(--rule);border-radius:3px;background:none;text-align:center;
+    font-size:17px;transition:border-color .5s var(--ease),color .5s var(--ease),background-color .5s var(--ease)}
+  .td-page-nav>button:hover,.td-others button:hover,.td-page-nav>button:active,.td-others button:active{border-color:var(--ink);color:var(--ink);background:none}
+  .td-page-nav>button{order:2;font-family:var(--text);font-size:12px;letter-spacing:.3em;text-transform:uppercase}
   .td-page-art{-webkit-mask-image:none;mask-image:none}
   .td-backdrop{opacity:.15}
   .tp-entry h3{font-size:22px}
@@ -313,6 +343,18 @@ html[data-theme-motion="close"]::view-transition-new(root){
 @keyframes bd-pulse{0%{transform:scale(1);opacity:0}12%{opacity:.85}100%{transform:scale(6.5);opacity:0}}
 .bd-breathe{transform-box:view-box;animation:bd-breathe 12s ease-in-out infinite}
 @keyframes bd-breathe{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.035);opacity:.7}}
+.bd-sweep{transform-box:view-box;animation:bd-sweep 20s ease-in-out infinite}
+@keyframes bd-sweep{0%,100%{transform:rotate(0)}50%{transform:rotate(9deg)}}
+.bd-rise{animation:bd-rise 8.8s linear infinite}
+@keyframes bd-rise{0%{transform:translateY(0);opacity:0}12%{opacity:1}85%{opacity:.9}100%{transform:translateY(-820px);opacity:0}}
+.bd-stream{animation:bd-stream 2.4s linear infinite}
+@keyframes bd-stream{to{stroke-dashoffset:-24}}
+.bd-flap{transform-box:fill-box;transform-origin:center;animation:bd-flap 1.6s ease-in-out infinite}
+@keyframes bd-flap{0%,100%{transform:scaleY(1)}50%{transform:scaleY(-.55)}}
+.bd-bob{animation:bd-bob 9s ease-in-out infinite}
+@keyframes bd-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.bd-ripple{transform-box:view-box;animation:bd-ripple 7.2s cubic-bezier(.2,.6,.3,1) infinite}
+@keyframes bd-ripple{0%{transform:scale(.4);opacity:0}15%{opacity:.85}100%{transform:scale(2.2);opacity:0}}
 .bd-drift{animation:bd-drift 80s linear infinite}
 @keyframes bd-drift{to{transform:translateX(-1600px)}}
 .bd-flow{animation:bd-flow 22s linear infinite}
@@ -327,8 +369,10 @@ html[data-theme-motion="close"]::view-transition-new(root){
 @keyframes bd-sway{0%,100%{transform:rotate(0)}25%{transform:rotate(-3deg)}75%{transform:rotate(3deg)}}
 .bd-fall{animation:bd-fall 10s linear infinite}
 @keyframes bd-fall{0%{transform:translateY(-30px);opacity:0}15%{opacity:1}80%{opacity:1}100%{transform:translateY(170px);opacity:0}}
-.calm .bd-breathe,.calm .bd-turn,.calm .bd-turn-slow,.calm .bd-turn-rev,.calm .bd-drift,.calm .bd-rays,.calm .bd-sway,.calm .bd-fall{animation:none!important;opacity:1}
-.calm .bd-pulse,.calm .bd-heat,.calm .bd-flow,.calm .bd-shoot{display:none}
+.calm .bd-sweep,.calm .bd-stream,.calm .bd-flap,.calm .bd-bob,.calm .bd-breathe,.calm .bd-turn,.calm .bd-turn-slow,.calm .bd-turn-rev,.calm .bd-drift,.calm .bd-rays,.calm .bd-sway,.calm .bd-fall{animation:none!important;opacity:1}
+.calm .bd-rise,.calm .bd-ripple,.calm .bd-pulse,.calm .bd-heat,.calm .bd-flow,.calm .bd-shoot{display:none}
+
+@media (min-width:440px) and (max-width:760px){ .td-others{grid-template-columns:repeat(4,minmax(0,1fr))} }
 
 /* short screens, such as a phone held sideways */
 @media (max-height:600px){
@@ -338,7 +382,7 @@ html[data-theme-motion="close"]::view-transition-new(root){
   .tp-swap{gap:6px}
 }
 @media (max-height:600px) and (min-width:761px){
-  .td-page-inner{padding-top:40px}
+  .td-page-inner{--gap:32px;padding-top:48px}
 }
 @media (max-height:420px){ .tp-eyebrow{display:none} }
 @media (forced-colors:active){
@@ -348,7 +392,7 @@ html[data-theme-motion="close"]::view-transition-new(root){
 }
 
 /* Reduce Motion keeps the gentle glides and fades, and stills everything that spins, flickers or flips. */
-.calm .tp-spin,.calm .tp-spin-slow,.calm .tp-spin-rev,.calm .tp-pulse,.calm .tp-twinkle,.calm .tp-flicker,.calm .tp-shimmer,.calm .tp-sway,
+.calm .tp-flow,.calm .tp-glide,.calm .tp-swing,.calm .tp-glow,.calm .tp-mist,.calm .db-sun,.calm .tp-spin,.calm .tp-spin-slow,.calm .tp-spin-rev,.calm .tp-pulse,.calm .tp-twinkle,.calm .tp-flicker,.calm .tp-shimmer,.calm .tp-sway,
 .calm .tp-wheel-outer,.calm .tp-wheel-inner,.calm .td-moon-ring,.calm .tp-sheen,.calm .td-con-line{animation:none!important}
 .calm .td-con-line{stroke-dashoffset:0}
 .calm .tp-letters span{animation-name:tp-fade!important}

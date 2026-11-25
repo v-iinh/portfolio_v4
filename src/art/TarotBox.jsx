@@ -31,8 +31,10 @@ export function TarotBox() {
       <path d="M48 252 V128 A72 72 0 0 1 192 128 V252 Z" fill="none" stroke={T.LINE} strokeWidth="1.3" />
       <path d="M42 252 V126 A78 78 0 0 1 198 126 V252" fill="none" stroke={T.LINE} strokeWidth="0.5" opacity="0.7" />
       {/* sun with the crescent moon inside it */}
-      <path d={wavyRays(cx, 150, 34, 58, 16, Math.PI / 16)} fill="none" stroke={T.LINE} strokeWidth="0.8" />
-      <path d={rays(cx, 150, 34, 64, 16)} stroke={T.LINE} strokeWidth="1.2" />
+      <g className="db-sun" style={{ transformOrigin: "120px 150px" }}>
+        <path d={wavyRays(cx, 150, 34, 58, 16, Math.PI / 16)} fill="none" stroke={T.LINE} strokeWidth="0.8" />
+        <path d={rays(cx, 150, 34, 64, 16)} stroke={T.LINE} strokeWidth="1.2" />
+      </g>
       <circle cx={cx} cy="150" r="32" fill={T.BOX_WIN} stroke={T.LINE} strokeWidth="1.4" />
       <circle cx={cx} cy="150" r="27" fill="none" stroke={T.LINE} strokeWidth="0.5" />
       <path d="M128 130 a21 21 0 1 0 0 40 a16 16 0 1 1 0 -40Z" fill={T.LINE} />
