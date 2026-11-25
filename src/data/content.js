@@ -3,7 +3,6 @@
 export const PROFILE = {
   name: "Vinh Tran",
   eyebrow: "Software engineer · Northeastern",
-  tagline: "Data tools, web apps and interactive installations, built for the organizations that keep Boston running.",
   email: "tran.v1@northeastern.edu",
   linkedin: "https://linkedin.com/in/viinh",
   github: "https://github.com/v-iinh",
@@ -11,11 +10,11 @@ export const PROFILE = {
 
 // Left to right in the spread. Each section is one card of the Major Arcana.
 export const CARDS = [
-  { id: "education", label: "Education", numeral: "IX", arcana: "The Hermit", blurb: "Computer science at Northeastern, systems concentration, class of 2029." },
-  { id: "work", label: "Work", numeral: "X", arcana: "Wheel of Fortune", blurb: "Four teams, from a city water utility to a youth arts studio." },
-  { id: "about", label: "About", numeral: "I", arcana: "The Magician", blurb: "Who I am and the tools I work with." },
-  { id: "projects", label: "Projects", numeral: "XVII", arcana: "The Star", blurb: "Three things I built on my own time." },
-  { id: "contact", label: "Contact", numeral: "XIX", arcana: "The Sun", blurb: "Email is the quickest way to reach me." },
+  { id: "education", label: "Education", numeral: "IX", arcana: "The Hermit" },
+  { id: "work", label: "Work", numeral: "X", arcana: "Wheel of Fortune" },
+  { id: "about", label: "About", numeral: "I", arcana: "The Magician" },
+  { id: "projects", label: "Projects", numeral: "XVII", arcana: "The Star" },
+  { id: "contact", label: "Contact", numeral: "XIX", arcana: "The Sun" },
 ];
 
 export const WORK = [

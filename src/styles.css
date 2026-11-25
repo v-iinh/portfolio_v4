@@ -18,8 +18,6 @@
 .tp-sky{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .tp-frame{position:relative;z-index:1;height:100%;border:1px solid var(--rule);outline:1px solid rgba(200,205,212,.08);outline-offset:-6px;padding:20px 24px 28px;animation:tp-fade 1.2s ease both;display:flex;flex-direction:column}
-.tp-corner{display:flex;justify-content:space-between;font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
-.tp-root:not([data-theme="light"]) .tp-corner span{color:var(--soft)}
 .tp-head{position:relative;flex:none;display:grid;justify-items:center;text-align:center;margin-top:10px;padding:0 8px}
 .td-head-layer{grid-area:1/1;opacity:0;transform:translateY(6px);filter:blur(2px);pointer-events:none;
   transition:opacity .7s var(--ease),transform .7s var(--ease),filter .7s var(--ease)}
@@ -27,7 +25,6 @@
 .td-h1{margin:0;font-family:var(--display);font-weight:500;font-size:clamp(34px,min(7vw,8.4vh),84px);line-height:1;letter-spacing:-.005em}
 .tp-swap{display:flex;flex-direction:column;align-items:center;gap:10px}
 .td-head-layer:first-child .tp-eyebrow{animation:tp-in 1s var(--ease-out) both}
-.td-head-layer:first-child .tp-tag{animation:tp-in 1.1s var(--ease-out) .5s both}
 @keyframes tp-in{from{opacity:0;transform:translateY(8px);filter:blur(3px)}to{opacity:1;transform:none;filter:none}}
 @keyframes tp-fade{from{opacity:0}to{opacity:1}}
 .tp-eyebrow{margin:0;font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--rust)}
@@ -36,7 +33,6 @@
 .tp-letters{display:inline-block}
 .tp-letters span{display:inline-block;animation:tp-letter .9s var(--ease-out) both}
 @keyframes tp-letter{from{opacity:0;transform:translateY(.35em);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
-.tp-tag{margin:0;max-width:480px;font-size:clamp(15px,calc(1.1vh + .5vw + 6px),19px);line-height:1.5;color:var(--soft)}
 .tp-svg{display:block;width:100%;height:100%}
 
 /* engraving draws itself, and the quiet living details */
@@ -217,10 +213,8 @@
   .tp-entry h3{font-size:22px}
   .td-close{top:16px;right:16px}
   .tp-frame{padding:16px 12px 20px}
-  .tp-corner span:last-child{display:none}
   .tp-head{margin-top:8px}
   .td-sky-wheel{top:56%;width:min(94vw,84vh);height:min(94vw,84vh)}
-  .tp-tag{font-size:16px}
   .tp-eyebrow{font-size:11px;letter-spacing:.2em}
 }
 
@@ -341,16 +335,14 @@ html[data-theme-motion="close"]::view-transition-new(root){
 /* short screens, such as a phone held sideways */
 @media (max-height:600px){
   .tp-frame{padding:10px 16px 12px}
-  .tp-corner{font-size:11px}
   .tp-head{margin-top:2px}
-  .tp-head .tp-tag{display:none}
   .tp-eyebrow{font-size:11px;letter-spacing:.22em}
   .tp-swap{gap:6px}
 }
 @media (max-height:600px) and (min-width:761px){
   .td-page-inner{padding-top:40px}
 }
-@media (max-height:420px){ .tp-eyebrow{display:none} .tp-corner{display:none} }
+@media (max-height:420px){ .tp-eyebrow{display:none} }
 @media (forced-colors:active){
   .td-card-body,.td-box,.td-flight-back,.td-close{outline:1px solid CanvasText}
   .td-mute{display:none}

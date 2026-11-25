@@ -388,22 +388,15 @@ export default function App() {
       <Sky enabled={!reduce} />
       <CursorLight calm={reduce} />
       <div ref={frameRef} className="tp-frame td-frame">
-        <header className="tp-corner">
-          <span>{PROFILE.name}</span>
-          <span>MMXXVI</span>
-        </header>
-
         <div ref={headRef} className="tp-head td-head">
           <div className={`tp-swap td-head-layer ${active ? "" : "on"}`} aria-hidden={!!active}>
             <p className="tp-eyebrow">{PROFILE.eyebrow}</p>
             <h1><span className="sr-only">{PROFILE.name}</span><Letters text={PROFILE.name} delay={200} /></h1>
-            <p className="tp-tag">{PROFILE.tagline}</p>
           </div>
           {CARDS.map((c) => (
             <div key={c.id} className={`tp-swap td-head-layer ${hover === c.id ? "on" : ""}`} aria-hidden={hover !== c.id}>
               <p className="tp-eyebrow">{c.numeral} · {c.arcana}</p>
               <p className="td-h1" role="presentation">{c.label}</p>
-              <p className="tp-tag">{c.blurb}</p>
             </div>
           ))}
         </div>
