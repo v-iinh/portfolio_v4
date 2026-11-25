@@ -17,7 +17,7 @@ import { Heavens } from "./components/Heavens.jsx";
 // x offset, how far the card rises out of the box, rotation
 export const FAN = [[-2.4, 2.38, -12], [-1.2, 2.8, -6], [0, 2.98, 0], [1.2, 2.8, 6], [2.4, 2.38, 12]];
 
-export const ROWS = [[-1.12, 4.12, -3], [0, 4.2, 0], [1.12, 4.12, 3], [-0.58, 2.14, -2], [0.58, 2.14, 2]];
+export const ROWS = [[-1.12, 4.66, -3], [0, 4.74, 0], [1.12, 4.66, 3], [-0.58, 2.6, -2], [0.58, 2.6, 2]];
 
 export const PEEK = [[-0.04, -0.3, -2.5], [0.04, -0.24, 2], [0, -0.18, -0.5]];
 
@@ -191,7 +191,7 @@ export default function App() {
       const m = mainRef.current;
       if (!m) return;
       const w = m.clientWidth - 8, h = m.clientHeight - 44;
-      const fan = Math.min(w / 6.3, h / 4.95), rows = Math.min(w / 3.5, h / 6.2);
+      const fan = Math.min(w / 6.3, h / 4.95), rows = Math.min(w / 3.5, h / 6.7);
       const useRows = rows > fan * 1.12;
       const c = Math.max(36, Math.min(132, Math.floor(useRows ? rows : fan)));
       setSize((s) => (s.c === c && s.narrow === useRows ? s : { c, narrow: useRows }));
@@ -465,6 +465,8 @@ export default function App() {
                         <span className="td-glare" aria-hidden="true" />
                       </span>
                     </button>
+                    <span className={`td-card-label ${away === c.id ? "is-away" : ""}`} aria-hidden="true"
+                      style={{ transitionDelay: settled && !hover ? `${order * 90}ms` : "0ms" }}>{c.label}</span>
                   </span>
                 </span>
               );

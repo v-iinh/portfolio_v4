@@ -83,7 +83,7 @@
 .td-lift{position:absolute;inset:0;transition:transform 1150ms var(--ease)}
 .td-lift.still{transition:none!important}
 .td-stage{position:absolute;left:50%;bottom:40px;width:calc(var(--c) * 6.2);height:calc(var(--c) * 4.9);transform:translateX(-50%)}
-.td-stage.narrow{width:calc(var(--c) * 3.4);height:calc(var(--c) * 6.1)}
+.td-stage.narrow{width:calc(var(--c) * 3.4);height:calc(var(--c) * 6.6)}
 .td-floor{position:absolute;left:50%;bottom:calc(var(--c) * -.07);width:calc(var(--c) * 1.8);height:calc(var(--c) * .2);margin-left:calc(var(--c) * -.9);
   background:radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.66), rgba(0,0,0,0.00) 70%)}
 .td-lid-wrap{position:absolute;left:50%;bottom:calc(var(--c) * 1.9);width:calc(var(--c) * 1.22);height:calc(var(--c) * .28);margin-left:calc(var(--c) * -.61);perspective:700px;z-index:0}
@@ -140,6 +140,14 @@
 .td-spread.hot .td-sparks svg{opacity:.55;transform:translateY(calc(var(--c) * -.16)) scale(1) rotate(0)}
 .td-spread.hot .td-sparks svg:nth-child(odd){animation:td-spark 2.4s ease-in-out .8s infinite}
 @keyframes td-spark{0%,100%{opacity:.55}50%{opacity:.15}}
+/* the small label under each card naming the page it opens, in the same voice as the hint under the deck */
+.td-card-label{position:absolute;left:-30%;right:-30%;top:calc(100% + var(--c) * .07);text-align:center;pointer-events:none;white-space:nowrap;
+  font-family:var(--text);font-style:italic;font-size:max(11px, calc(var(--c) * .13));line-height:1.2;letter-spacing:.02em;color:var(--soft);
+  opacity:0;transform:translateY(-4px);transition:opacity .7s var(--ease),transform .7s var(--ease),color .6s var(--ease)}
+.settled .td-card-label{opacity:1;transform:none}
+.settled.has-hover .td-card-label{opacity:.45}
+.settled .td-spread.hot .td-card-label{opacity:1;color:var(--ink);transform:translateY(calc(var(--c) * .04))}
+.td-card-label.is-away{opacity:0!important;transition-duration:.2s}
 .td-hint{position:absolute;left:0;right:0;bottom:-34px;height:1.5em;margin:0;text-align:center;font-style:italic;font-size:17px;color:var(--soft)}
 .td-hint span{position:absolute;left:0;right:0;opacity:0;transform:translateY(4px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .td-hint span.on{opacity:1;transform:none}
@@ -308,6 +316,8 @@ html[data-theme-motion="close"]::view-transition-new(root){
 .bd-turn-rev{animation:tp-spin 95s linear infinite reverse}
 .bd-pulse{transform-box:fill-box;transform-origin:center;animation:bd-pulse 7.2s cubic-bezier(.2,.6,.3,1) infinite}
 @keyframes bd-pulse{0%{transform:scale(1);opacity:0}12%{opacity:.85}100%{transform:scale(6.5);opacity:0}}
+.bd-breathe{transform-box:view-box;animation:bd-breathe 12s ease-in-out infinite}
+@keyframes bd-breathe{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.035);opacity:.7}}
 .bd-drift{animation:bd-drift 80s linear infinite}
 @keyframes bd-drift{to{transform:translateX(-1600px)}}
 .bd-flow{animation:bd-flow 22s linear infinite}
@@ -322,7 +332,7 @@ html[data-theme-motion="close"]::view-transition-new(root){
 @keyframes bd-sway{0%,100%{transform:rotate(0)}25%{transform:rotate(-3deg)}75%{transform:rotate(3deg)}}
 .bd-fall{animation:bd-fall 10s linear infinite}
 @keyframes bd-fall{0%{transform:translateY(-30px);opacity:0}15%{opacity:1}80%{opacity:1}100%{transform:translateY(170px);opacity:0}}
-.calm .bd-turn,.calm .bd-turn-slow,.calm .bd-turn-rev,.calm .bd-drift,.calm .bd-rays,.calm .bd-sway,.calm .bd-fall{animation:none!important;opacity:1}
+.calm .bd-breathe,.calm .bd-turn,.calm .bd-turn-slow,.calm .bd-turn-rev,.calm .bd-drift,.calm .bd-rays,.calm .bd-sway,.calm .bd-fall{animation:none!important;opacity:1}
 .calm .bd-pulse,.calm .bd-heat,.calm .bd-flow,.calm .bd-shoot{display:none}
 
 /* short screens, such as a phone held sideways */

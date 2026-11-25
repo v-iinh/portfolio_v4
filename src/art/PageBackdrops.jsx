@@ -24,6 +24,15 @@ function StarDust({ seed, count = 70, maxY = 0.82 }) {
   return <g>{out}</g>;
 }
 
+function fan(cx, cy, r1, r2, n, a0, a1) {
+  let d = "";
+  for (let i = 0; i < n; i++) {
+    const a = a0 + ((a1 - a0) * i) / (n - 1), long = i % 3 === 0 ? 1 : 0.78;
+    d += `M${(cx + Math.cos(a) * r1).toFixed(1)} ${(cy + Math.sin(a) * r1).toFixed(1)}L${(cx + Math.cos(a) * r2 * long).toFixed(1)} ${(cy + Math.sin(a) * r2 * long).toFixed(1)}`;
+  }
+  return d;
+}
+
 function ridge(seed, base, amp, step) {
   const r = rng(seed);
   let d = `M-20 ${H + 20} L-20 ${base}`;
@@ -159,9 +168,48 @@ function Magician() {
       </g>
     );
   };
+  // orbits around a magic circle, with small satellites that travel them
+  const orbit = (cx, cy, dir) => (
+    <g>
+      <circle cx={cx} cy={cy} r="236" {...ink} strokeWidth="0.7" strokeDasharray="2 9" />
+      <circle cx={cx} cy={cy} r="266" {...ink} strokeWidth="0.5" />
+      <g className={dir > 0 ? "bd-turn" : "bd-turn-rev"} style={{ transformOrigin: `${cx}px ${cy}px` }}>
+        {[0.4, 2.5, 4.4].map((a, i) => (
+          <g key={i}>
+            <circle cx={cx + Math.cos(a) * 236} cy={cy + Math.sin(a) * 236} r={i === 1 ? 9 : 6} fill={T.PAPER} stroke={T.INK} strokeWidth="1.1" />
+            {i === 1 && <circle cx={cx + Math.cos(a) * 236} cy={cy + Math.sin(a) * 236} r="15" {...ink} strokeWidth="0.6" />}
+          </g>
+        ))}
+        <polygon points={starPoints(cx + Math.cos(3.4) * 266, cy + Math.sin(3.4) * 266, 7, 1.8, 4)} fill={T.INK} />
+      </g>
+    </g>
+  );
   return (
     <g>
-      <StarDust seed={1} count={34} />
+      <StarDust seed={1} count={72} maxY={0.98} />
+      {/* as above, so below: light pours down from the top and rises from the bottom */}
+      <g className="bd-breathe" style={{ transformOrigin: "800px -160px" }}>
+        <path d={fan(800, -160, 230, 860, 53, Math.PI * 0.05, Math.PI * 0.95)} {...ink} strokeWidth="0.9" />
+      </g>
+      <g className="bd-breathe" style={{ transformOrigin: "800px 1160px", animationDelay: "-5s" }}>
+        <path d={fan(800, 1160, 230, 860, 53, Math.PI * 1.05, Math.PI * 1.95)} {...ink} strokeWidth="0.9" />
+      </g>
+      <path d="M560 70 A520 520 0 0 0 1040 70" {...ink} strokeWidth="0.9" strokeDasharray="1 7" />
+      <path d="M560 930 A520 520 0 0 1 1040 930" {...ink} strokeWidth="0.9" strokeDasharray="1 7" />
+      {/* rings of light radiating in from each corner */}
+      {[[0, 0, 0], [W, 0, 1], [0, H, 3], [W, H, 2]].map(([cx, cy, q], k) => (
+        <g key={k}>
+          {[90, 140, 196, 258].map((rr, i) => {
+            const a0 = (q * Math.PI) / 2, a1 = a0 + Math.PI / 2;
+            const x0 = cx + Math.cos(a0) * rr, y0 = cy + Math.sin(a0) * rr, x1 = cx + Math.cos(a1) * rr, y1 = cy + Math.sin(a1) * rr;
+            return <path key={i} d={`M${x0.toFixed(1)} ${y0.toFixed(1)} A${rr} ${rr} 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`} {...ink} strokeWidth={i === 1 ? 1.2 : 0.7} strokeDasharray={i % 2 ? "none" : "2 8"} />;
+          })}
+          <polygon className="tp-twinkle" style={{ animationDelay: `${-k * 0.9}s` }}
+            points={starPoints(cx + (cx ? -1 : 1) * 118, cy + (cy ? -1 : 1) * 118, 10, 2.4, 4)} fill={T.INK} />
+        </g>
+      ))}
+      {orbit(330, 500, 1)}
+      {orbit(1270, 500, -1)}
       {/* the wand: a vertical staff of light through the middle */}
       <path d="M800 40 V960" {...ink} strokeWidth="1" />
       <path d="M792 40 V960 M808 40 V960" {...ink} strokeWidth="0.5" strokeDasharray="1 7" />
@@ -171,6 +219,7 @@ function Magician() {
       {circle(1270, 500, false)}
       <path d={loop} {...ink} strokeWidth="1.2" />
       <path d={loop} {...ink} strokeWidth="0.6" strokeDasharray="1 9" transform="translate(0 -14)" />
+      <path d={loop} {...ink} strokeWidth="0.6" strokeDasharray="2 10" transform="translate(800 500) scale(1.07 1.36) translate(-800 -500)" />
       {/* two points of light travelling the loop */}
       <path className="bd-flow" d={loop} pathLength="1000" {...ink} strokeWidth="3.2" strokeDasharray="34 966" />
       <path className="bd-flow" style={{ animationDelay: "-11s" }} d={loop} pathLength="1000" {...ink} strokeWidth="3.2" strokeDasharray="34 966" />
