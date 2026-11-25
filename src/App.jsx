@@ -509,7 +509,6 @@ export default function App() {
                   <h2 id="td-page-title"><span className="sr-only">{current.label}</span><Letters text={current.label} delay={250} /></h2>
                   <SectionBody id={current.id} />
                   <div className="td-page-nav">
-                    <button onClick={closePage}>Close</button>
                     <div className="td-others">
                       {CARDS.filter((c) => c.id !== current.id).map((c) => (
                         <button key={c.id} onClick={() => showSection(c.id)}>{c.label}</button>
