@@ -187,7 +187,7 @@
 .is-open .td-page-inner>*:nth-child(4){animation-delay:.52s}.is-open .td-page-inner>*:nth-child(n+5){animation-delay:.62s}
 .td-page h2{margin:14px 0 0;font-size:clamp(46px,6vw,76px);color:var(--ink)}
 .td-page-tag{margin:18px auto 0;max-width:32rem;font-size:19px;line-height:1.55;color:var(--muted)}
-.tp-lead{margin:40px auto 0;max-width:34rem;font-size:19px;line-height:1.65;color:var(--body)}
+.tp-lead{margin:40px auto 0;max-width:34rem;font-size:19px;line-height:1.65;color:var(--muted)}
 .tp-list{list-style:none;margin:44px 0 0;padding:0;text-align:left;border-top:1px solid var(--rule)}
 .tp-lead + .tp-list{margin-top:36px}
 .tp-entry{padding:22px 0;border-bottom:1px solid var(--rule)}
