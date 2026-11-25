@@ -20,7 +20,7 @@ npm run build      # outputs to dist/
 npm run preview    # serves dist/ locally to check it
 ```
 
-On Vercel or Netlify, import the repository and keep the defaults: build command `npm run build`, output directory `dist`.
+On Vercel, use build command `npm run build`; `vercel.json` sets the output directory to `dist`. On Netlify, use build command `npm run build` and output directory `dist`.
 
 ## Where things live
 
