@@ -36,7 +36,7 @@ export function SectionBody({ id }) {
   );
   if (id === "about") return (
     <>
-      <p>I study computer science at Northeastern, concentrating in systems. Most of my work sits between messy data and the people who depend on it, and I like building things people can walk into.</p>
+      <p className="tp-lead">I study computer science at Northeastern, concentrating in systems. Most of my work sits between messy data and the people who depend on it, and I like building things people can walk into.</p>
       <ul className="tp-list">{SKILLS.map(([k, v]) => <Entry key={k} title={k}><p>{v}</p></Entry>)}</ul>
     </>
   );
