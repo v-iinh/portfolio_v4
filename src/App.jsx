@@ -495,7 +495,6 @@ export default function App() {
                 <div className={`td-page-inner ${swap}`} key={current.id}>
                   <p className="tp-eyebrow">{current.numeral} · {current.arcana}</p>
                   <h2 id="td-page-title"><span className="sr-only">{current.label}</span><Letters text={current.label} delay={250} /></h2>
-                  <p className="td-page-tag">{current.blurb}</p>
                   <SectionBody id={current.id} />
                   <div className="td-page-nav">
                     <button onClick={closePage}>Close</button>
