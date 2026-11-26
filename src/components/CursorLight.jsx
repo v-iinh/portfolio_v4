@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 export function CursorLight() {
   const core = useRef(null), halo = useRef(null);
   const [on, setOn] = useState(false);
+  const [onDark, setOnDark] = useState(false); // over the dark deck box, where the light-mode cursor switches to a glow
   const [fine] = useState(() => typeof window !== "undefined" && window.matchMedia("(pointer: fine) and (hover: hover)").matches);
 
   useEffect(() => {
@@ -13,8 +14,10 @@ export function CursorLight() {
       tx = e.clientX; ty = e.clientY;
       if (!seen) { cx = hx = tx; cy = hy = ty; seen = true; }
       setOn(true);
+      const dark = !!(e.target && e.target.closest && e.target.closest(".td-box, .td-lid-wrap"));
+      setOnDark((d) => (d === dark ? d : dark));
     };
-    const leave = () => { setOn(false); seen = false; };
+    const leave = () => { setOn(false); setOnDark(false); seen = false; };
     const down = () => { core.current?.classList.remove("tl-pulse"); void core.current?.offsetWidth; core.current?.classList.add("tl-pulse"); };
     const tick = () => {
       cx += (tx - cx) * 0.18; cy += (ty - cy) * 0.18;
@@ -41,9 +44,9 @@ export function CursorLight() {
 
   if (!fine) return null;
   return (
-    <div className={`tl ${on ? "on" : ""}`} aria-hidden="true">
-      <span ref={halo} className="tl-halo"><i /></span>
-      <span ref={core} className="tl-core"><i /></span>
+    <div className={`tl ${on ? "on" : ""} ${onDark ? "on-dark" : ""}`} aria-hidden="true">
+      <span ref={halo} className="tl-halo"><i /><i className="lit" /></span>
+      <span ref={core} className="tl-core"><i /><i className="lit" /></span>
     </div>
   );
 }

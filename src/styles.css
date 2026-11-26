@@ -1385,7 +1385,7 @@
   --rule: rgba(42, 38, 33, 0.22);
   --rust: #7a4b3a;
   --gold: #7a4b3a;
-  --body: #3b362f;
+  --body: #00000090; /* black at about 56%, a soft black on the cream paper */
   --sub: #6e5a43;
   --soft: #5f584e;
   background-image: repeating-linear-gradient(
@@ -1508,7 +1508,41 @@
     rgba(42, 38, 33, 0) 68%
   );
 }
-[data-theme="light"] .tl-core i {
+/* over the dark deck box the light-mode cursor crossfades to a warm glow, like the dark-mode one */
+.tl .tl-halo i.lit,
+.tl .tl-core i.lit {
+  opacity: 0;
+}
+[data-theme="light"] .tl.on-dark .tl-halo i:not(.lit),
+[data-theme="light"] .tl.on-dark .tl-core i:not(.lit) {
+  opacity: 0;
+}
+[data-theme="light"] .tl.on-dark .tl-halo i.lit {
+  opacity: 0.9;
+}
+[data-theme="light"] .tl.on-dark .tl-core i.lit {
+  opacity: 1;
+}
+[data-theme="light"] .tl-halo i.lit {
+  mix-blend-mode: screen;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--paper) 28%, transparent) 0%,
+    color-mix(in srgb, var(--paper) 10%, transparent) 32%,
+    transparent 68%
+  );
+}
+[data-theme="light"] .tl-core i.lit {
+  background: radial-gradient(
+    circle,
+    var(--paper) 0%,
+    var(--paper) 40%,
+    color-mix(in srgb, var(--paper) 55%, transparent) 64%,
+    transparent 100%
+  );
+  box-shadow: 0 0 6px 2px color-mix(in srgb, var(--paper) 45%, transparent);
+}
+[data-theme="light"] .tl-core i:not(.lit) {
   background: radial-gradient(
     circle,
     #2a2621 0%,
