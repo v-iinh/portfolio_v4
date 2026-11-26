@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-export function CursorLight({ calm }) {
+export function CursorLight() {
   const core = useRef(null), halo = useRef(null);
   const [on, setOn] = useState(false);
   const [fine] = useState(() => typeof window !== "undefined" && window.matchMedia("(pointer: fine) and (hover: hover)").matches);
@@ -17,9 +17,8 @@ export function CursorLight({ calm }) {
     const leave = () => { setOn(false); seen = false; };
     const down = () => { core.current?.classList.remove("tl-pulse"); void core.current?.offsetWidth; core.current?.classList.add("tl-pulse"); };
     const tick = () => {
-      const speed = calm ? 1 : 0.18;
-      cx += (tx - cx) * speed; cy += (ty - cy) * speed;
-      hx += (tx - hx) * (calm ? 1 : 0.08); hy += (ty - hy) * (calm ? 1 : 0.08);
+      cx += (tx - cx) * 0.18; cy += (ty - cy) * 0.18;
+      hx += (tx - hx) * 0.08; hy += (ty - hy) * 0.08;
       if (core.current) core.current.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
       if (halo.current) halo.current.style.transform = `translate3d(${hx}px, ${hy}px, 0)`;
       raf = requestAnimationFrame(tick);
@@ -38,7 +37,7 @@ export function CursorLight({ calm }) {
       window.removeEventListener("blur", leave);
       document.documentElement.classList.remove("tl-light");
     };
-  }, [calm, fine]);
+  }, [fine]);
 
   if (!fine) return null;
   return (

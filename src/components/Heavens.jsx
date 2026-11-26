@@ -4,11 +4,11 @@ import { CelestialWheel } from "./CelestialWheel.jsx";
 import { moonPath } from "../art/shapes.js";
 import { ConstellationField } from "./ConstellationField.jsx";
 
-export function Heavens({ calm }) {
+export function Heavens() {
   const size = 900, c = size / 2;
   return (
     <div className="td-heavens" aria-hidden="true">
-      <ConstellationField calm={calm} />
+      <ConstellationField />
       <div className="td-sky-wheel">
         <CelestialWheel size={760} />
         <svg className="td-moon-ring" viewBox={`0 0 ${size} ${size}`}>

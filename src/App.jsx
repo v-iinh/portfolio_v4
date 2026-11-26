@@ -32,7 +32,7 @@ function initialTheme() {
   return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
 }
 
-function revealThemeWithoutViewTransition(root, x, y, reduce, direction) {
+function revealThemeWithoutViewTransition(root, x, y, direction) {
   const snapshot = root.cloneNode(true);
   snapshot.setAttribute("aria-hidden", "true");
   snapshot.inert = true;
@@ -46,17 +46,6 @@ function revealThemeWithoutViewTransition(root, x, y, reduce, direction) {
     margin: "0",
     opacity: "1",
   });
-
-  if (reduce) {
-    document.body.appendChild(snapshot);
-    void snapshot.offsetWidth;
-    requestAnimationFrame(() => {
-      snapshot.style.transition = "opacity 180ms ease-out";
-      snapshot.style.opacity = "0";
-      window.setTimeout(() => snapshot.remove(), 210);
-    });
-    return;
-  }
 
   const maxRadius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y)) + 2;
   const duration = 950;
@@ -125,7 +114,6 @@ function ThemeToggle({ theme, onToggle }) {
 }
 
 export default function App() {
-  const reduce = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const [theme, setThemeState] = useState(initialTheme);
   setTheme(theme); // the drawings below read their colours from the current theme
 
@@ -141,7 +129,7 @@ export default function App() {
     const r = e.currentTarget.getBoundingClientRect();
     const x = r.left + r.width / 2, y = r.top + r.height / 2;
     const root = document.documentElement;
-    if (document.startViewTransition && !reduce) {
+    if (document.startViewTransition) {
       root.dataset.themeMotion = next === "light" ? "open" : "close";
       root.style.setProperty("--vx", `${x}px`);
       root.style.setProperty("--vy", `${y}px`);
@@ -154,7 +142,7 @@ export default function App() {
     } else {
       const currentRoot = document.querySelector(".td-root");
       if (currentRoot) {
-        revealThemeWithoutViewTransition(currentRoot, x, y, reduce, next === "light" ? "open" : "close");
+        revealThemeWithoutViewTransition(currentRoot, x, y, next === "light" ? "open" : "close");
         flushSync(() => setThemeState(next));
       } else {
         setThemeState(next);
@@ -256,7 +244,7 @@ export default function App() {
     if (!open) { setSettled(false); setHover(null); return undefined; }
     const t = setTimeout(() => { setSettled(true); setStatus(`The deck is open. ${CARDS.length} cards: ${CARDS.map((c) => c.label).join(", ")}.`); }, 2450);
     return () => clearTimeout(t);
-  }, [open, reduce]);
+  }, [open]);
 
   useEffect(() => {
     const onKey = (e) => {
@@ -296,12 +284,6 @@ export default function App() {
     };
   }
   function frames(from, to, forward) {
-    if (reduce) {
-      // Reduce Motion: no 3D flip or zoom. The page simply grows from the card's spot and fades in.
-      const k = (b, o) => ({ left: `${b.left}px`, top: `${b.top}px`, width: `${b.width}px`, height: `${b.height}px`, opacity: o, transform: "rotateY(180deg)" });
-      const f = [k(from, 0), k(to, 1)];
-      return forward ? f : f.reverse();
-    }
     const lift = { ...from, top: from.top - from.height * 0.12 };
     const mid = { left: (from.left + to.left) / 2, top: (from.top + to.top) / 2, width: (from.width + to.width) / 2, height: (from.height + to.height) / 2 };
     const k = (b, rot, ry, s = 1) => ({ left: `${b.left}px`, top: `${b.top}px`, width: `${b.width}px`, height: `${b.height}px`, transform: `perspective(2200px) rotate(${rot}deg) rotateY(${ry}deg) scale(${s})` });
@@ -346,7 +328,7 @@ export default function App() {
   }
   // The hovered card tilts toward the pointer; the button itself never moves, so the hover can't flicker.
   function tilt(e) {
-    if (!settled || reduce) return;
+    if (!settled) return;
     const el = e.currentTarget, r = el.getBoundingClientRect();
     const x = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)), y = Math.max(0, Math.min(1, (e.clientY - r.top) / r.height));
     el.style.setProperty("--ry", `${(x - 0.5) * 16}deg`);
@@ -367,7 +349,7 @@ export default function App() {
     if (!el || !page || page.phase === "open") return undefined;
     const { from, to } = page.geo;
     if (page.phase === "in") el.focus({ preventScroll: true }); // focus moves into the page as soon as it starts opening
-    const anim = el.animate(frames(from, to, page.phase === "in"), { duration: reduce ? 800 : FLIGHT_MS, easing: EASE, fill: "forwards" });
+    const anim = el.animate(frames(from, to, page.phase === "in"), { duration: FLIGHT_MS, easing: EASE, fill: "forwards" });
     anim.onfinish = () => {
       if (page.phase === "in") setPage((p) => (p ? { ...p, phase: "open" } : p));
       else { const id = page.id; setPage(null); setShown(null); focusCard(id); }
@@ -388,11 +370,11 @@ export default function App() {
   const hint = open ? (settled ? "Choose a card" : "") : "Tap the deck";
 
   return (
-    <div className={`tp-root td-root ${reduce ? "calm" : ""}`} data-theme={theme}>
+    <div className="tp-root td-root" data-theme={theme}>
       <EngravingDefs />
-      <Heavens calm={reduce} />
-      <Sky enabled={!reduce} />
-      <CursorLight calm={reduce} />
+      <Heavens />
+      <Sky />
+      <CursorLight />
       <div ref={frameRef} className="tp-frame td-frame">
         <div ref={headRef} className="tp-head td-head">
           <div className={`tp-swap td-head-layer ${active ? "" : "on"}`} aria-hidden={!!active}>
@@ -455,7 +437,7 @@ export default function App() {
                       onFocus={() => enter(c.id)} onBlur={leave}
                     >
                       <span className="td-card-body">
-                        <span className={`td-face-art ${open && !reduce ? "tp-drawing" : ""}`} style={{ "--card-delay": `${1300 + order * 110}ms` }}>
+                        <span className={`td-face-art ${open ? "tp-drawing" : ""}`} style={{ "--card-delay": `${1300 + order * 110}ms` }}>
                           <CardFace card={c} uid="fan" />
                         </span>
                         <span className="td-mute" aria-hidden="true" />
@@ -497,10 +479,10 @@ export default function App() {
               {bgLeaving && bgLeaving !== current.id && (
                 <div className="td-page-art is-leaving" aria-hidden="true" key={`art-${bgLeaving}`}
                   onAnimationEnd={(e) => { if (e.target === e.currentTarget && e.animationName === "td-art-out") setBgLeaving(null); }}>
-                  <PageBackdrop id={bgLeaving} calm={reduce} />
+                  <PageBackdrop id={bgLeaving} />
                 </div>
               )}
-              <div className="td-page-art" aria-hidden="true" key={`art-${current.id}`}><PageBackdrop id={current.id} calm={reduce} /></div>
+              <div className="td-page-art" aria-hidden="true" key={`art-${current.id}`}><PageBackdrop id={current.id} /></div>
               <div className="td-page-frame" aria-hidden="true" />
               <button id="td-close" className="td-close" onClick={closePage} aria-label="Return the card to the deck"><span /><span /></button>
               <div className="td-page-scroll">

@@ -121,7 +121,7 @@ function Hermit() {
 }
 
 /* X Wheel of Fortune: planets travel their orbits while the two great wheel rims turn */
-function Wheel({ calm }) {
+function Wheel() {
   const ink = { fill: "none", stroke: T.INK };
   const rim = (cx, cy, R, n) => (
     <g>
@@ -169,10 +169,6 @@ function Wheel({ calm }) {
         ))}
         {orbits.map((rx, i) => {
           const size = 8 + (i % 3) * 4, dur = 40 + i * 14, start = (i * 0.29) % 1;
-          if (calm) {
-            const a = 0.6 + i * 1.7, x = 800 + Math.cos(a) * rx, y = 500 + Math.sin(a) * rx * 0.34;
-            return <circle key={`p${i}`} cx={x} cy={y} r={size} fill={T.PAPER} stroke={T.INK} strokeWidth="1.2" />;
-          }
           return (
             <g key={`p${i}`}>
               <circle r={size} fill={T.PAPER} stroke={T.INK} strokeWidth="1.2">
@@ -441,11 +437,11 @@ function Sun() {
 
 const SCENES = { education: Hermit, work: Wheel, about: Magician, projects: StarField, contact: Sun };
 
-export function PageBackdrop({ id, calm = false }) {
+export function PageBackdrop({ id }) {
   const Scene = SCENES[id];
   return (
     <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" className="td-backdrop" aria-hidden="true">
-      <Scene calm={calm} />
+      <Scene />
     </svg>
   );
 }

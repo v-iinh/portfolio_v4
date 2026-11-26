@@ -5,7 +5,7 @@ import { T } from "../theme.js";
 // A living constellation field, in the spirit of particles.js: faint stars drift, link up with fine
 // silver lines when they come near each other, reach toward the pointer with gold lines, ease away
 // from it, and scatter when you click. Works with touch too.
-export function ConstellationField({ calm }) {
+export function ConstellationField() {
   const ref = useRef(null);
   useEffect(() => {
     const cv = ref.current, g = cv.getContext("2d");
@@ -35,16 +35,14 @@ export function ConstellationField({ calm }) {
       g.clearRect(0, 0, w, h);
       const L = LINK(), R = REACH();
       for (const s of stars) {
-        if (!calm) {
-          if (pointer.active) {
-            const dx = s.x - pointer.x, dy = s.y - pointer.y, d = Math.hypot(dx, dy);
-            if (d < PUSH && d > 0.1) { const f = (1 - d / PUSH) * 0.06; s.vx += (dx / d) * f; s.vy += (dy / d) * f; }
-          }
-          s.vx *= 0.94; s.vy *= 0.94;
-          s.x += s.bx + s.vx; s.y += s.by + s.vy;
-          if (s.x < -10) s.x = w + 10; else if (s.x > w + 10) s.x = -10;
-          if (s.y < -10) s.y = h + 10; else if (s.y > h + 10) s.y = -10;
+        if (pointer.active) {
+          const dx = s.x - pointer.x, dy = s.y - pointer.y, d = Math.hypot(dx, dy);
+          if (d < PUSH && d > 0.1) { const f = (1 - d / PUSH) * 0.06; s.vx += (dx / d) * f; s.vy += (dy / d) * f; }
         }
+        s.vx *= 0.94; s.vy *= 0.94;
+        s.x += s.bx + s.vx; s.y += s.by + s.vy;
+        if (s.x < -10) s.x = w + 10; else if (s.x > w + 10) s.x = -10;
+        if (s.y < -10) s.y = h + 10; else if (s.y > h + 10) s.y = -10;
       }
       // lines between neighbouring stars
       g.lineWidth = 0.6;
@@ -66,18 +64,17 @@ export function ConstellationField({ calm }) {
         }
       }
       for (const s of stars) {
-        const tw = calm ? 0.8 : 0.55 + 0.45 * Math.sin(t * 1.4 + s.p);
+        const tw = 0.55 + 0.45 * Math.sin(t * 1.4 + s.p);
         g.fillStyle = `rgba(${T.STAR},${0.55 * tw})`;
         g.beginPath(); g.arc(s.x, s.y, s.r, 0, Math.PI * 2); g.fill();
         if (s.big) sparkle(s.x, s.y, s.r, 0.32 * tw);
       }
-      if (!calm || pointer.active) raf = requestAnimationFrame(frame);
+      raf = requestAnimationFrame(frame);
     };
     const kick = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(frame); };
-    const move = (e) => { pointer.x = e.clientX; pointer.y = e.clientY; pointer.active = true; if (calm) kick(); };
-    const out = () => { pointer.active = false; if (calm) kick(); };
+    const move = (e) => { pointer.x = e.clientX; pointer.y = e.clientY; pointer.active = true; };
+    const out = () => { pointer.active = false; };
     const burst = (e) => {
-      if (calm) return;
       for (const s of stars) {
         const dx = s.x - e.clientX, dy = s.y - e.clientY, d = Math.hypot(dx, dy);
         if (d < 220 && d > 0.1) { const f = (1 - d / 220) * 2.4; s.vx += (dx / d) * f; s.vy += (dy / d) * f; }
@@ -100,6 +97,6 @@ export function ConstellationField({ calm }) {
       document.removeEventListener("pointerleave", out);
       window.removeEventListener("blur", out);
     };
-  }, [calm]);
+  }, []);
   return <canvas ref={ref} className="td-field" aria-hidden="true" />;
 }
