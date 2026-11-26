@@ -2,10 +2,9 @@
 import { useEffect, useRef } from "react";
 import { T } from "../theme.js";
 
-export function Sky({ enabled }) {
+export function Sky() {
   const ref = useRef(null);
   useEffect(() => {
-    if (!enabled) return;
     const cv = ref.current, g = cv.getContext("2d");
     let w = 0, h = 0, raf = 0;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -27,6 +26,6 @@ export function Sky({ enabled }) {
     raf = requestAnimationFrame(tick);
     window.addEventListener("resize", fit);
     return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", fit); };
-  }, [enabled]);
+  }, []);
   return <canvas ref={ref} className="tp-sky" aria-hidden="true" />;
 }
