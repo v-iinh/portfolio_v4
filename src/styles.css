@@ -1159,7 +1159,7 @@
   color: var(--muted);
 }
 .tp-entry a {
-  color: var(--ink);
+  color: var(--body);
   text-decoration: none;
   background: linear-gradient(currentColor, currentColor) left bottom/0 1px
     no-repeat;
