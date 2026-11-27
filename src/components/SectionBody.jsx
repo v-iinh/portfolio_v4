@@ -15,19 +15,14 @@ export function Entry({ title, sub, meta, children }) {
 }
 
 export function SectionBody({ id }) {
-  if (id === "work") return (
-    <ul className="tp-list">
-      {WORK.map((w) => <Entry key={w.org} title={w.role} sub={w.org} meta={w.when}><p>{w.text}</p></Entry>)}
-    </ul>
-  );
-  if (id === "projects") return (
-    <ul className="tp-list">
-      {PROJECTS.map((p) => <Entry key={p.name} title={p.name} sub={p.stack} meta={p.when}><p>{p.text}</p></Entry>)}
-    </ul>
-  );
   if (id === "education") return (
     <ul className="tp-list">
       {EDUCATION.map((e) => (<Entry key={e.institution} title={e.institution} sub={e.degree} meta={e.when}><p>{e.text}</p></Entry>))}
+    </ul>
+  );
+  if (id === "work") return (
+    <ul className="tp-list">
+      {WORK.map((w) => <Entry key={w.org} title={w.role} sub={w.org} meta={w.when}><p>{w.text}</p></Entry>)}
     </ul>
   );
   if (id === "about") return (
@@ -37,6 +32,11 @@ export function SectionBody({ id }) {
         {ABOUT.content.map((a) => (<Entry key={a.category} title={a.category}><p>{a.text}</p></Entry>))}
       </ul>
     </>
+  );
+  if (id === "projects") return (
+    <ul className="tp-list">
+      {PROJECTS.map((p) => <Entry key={p.name} title={p.name} sub={p.stack} meta={p.when}><p>{p.text}</p></Entry>)}
+    </ul>
   );
   if (id === "contact") return (
     <>

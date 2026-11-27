@@ -15,6 +15,21 @@ export const CARDS = [
   { id: "contact", label: "Contact", numeral: "XIX", arcana: "The Sun" },
 ];
 
+export const EDUCATION = [
+  {
+    institution: "Northeastern University",
+    degree: "B.S. Computer Science, Systems Concentration",
+    when: "2025 - 2029",
+    text: "Undergraduate student at Northeastern's Khoury College of Computer Sciences with a concentration in Systems. Experiential learning includes research projects and co-op programs.",
+  },
+  {
+    institution: "Boston Latin School",
+    degree: "High School Diploma",
+    when: "2019 - 2025",
+    text: "Completed a full honors curriculum with a focus on research and STEM extracurriculars. Received national recognition in programming competitions (USACO, ACSL) and community service (InnerView).",
+  },
+];
+
 export const WORK = [
   {
     role: "Software Engineer Co-op",
@@ -42,39 +57,6 @@ export const WORK = [
   },
 ];
 
-export const PROJECTS = [
-  {
-    name: "Socratic",
-    when: "Dec 2024 – Now",
-    stack: "Next.js, Clerk, React, Neon, Drizzle ORM",
-    text: "An AI learning platform with sign-in, course management and video lessons. I also wrote a research paper and case study on AI in education and presented it to 400+ students." },
-  {
-    name: "Relief Route",
-    when: "Jul 2024 - Nov 2024",
-    stack: "Groq, Google Maps API, React",
-    text: "Finds nearby emergency food resources in one map, with an admin dashboard to manage 200+ unregistered pantries and track engagement." },
-  {
-    name: "Instagram Data Tracker",
-    when: "Jan 2025 – Mar 2025",
-    stack: "JavaScript, GraphQL, Fetch API",
-    text: "Pulls follower data through GraphQL endpoints and compares snapshots over time to find new followers, unfollows and one-way connections, all client-side." },
-];
-
-export const EDUCATION = [
-  {
-    institution: "Northeastern University",
-    degree: "B.S. Computer Science, Systems Concentration",
-    when: "2025 - 2029",
-    text: "Undergraduate student at Northeastern's Khoury College of Computer Sciences with a concentration in Systems. Experiential learning includes research projects and co-op programs.",
-  },
-  {
-    institution: "Boston Latin School",
-    degree: "High School Diploma",
-    when: "2019 - 2025",
-    text: "Completed a full honors curriculum with a focus on research and STEM extracurriculars. Received national recognition in programming competitions (USACO, ACSL) and community service (InnerView).",
-  },
-];
-
 export const ABOUT = {
   description: "I enjoy building software that is reliable and scalable. I'm always open to making new connections and expanding my technical skills, so feel free to reach out!",
   content: [
@@ -92,3 +74,21 @@ export const ABOUT = {
     },
   ],
 };
+
+export const PROJECTS = [
+  {
+    name: "Socratic",
+    when: "Dec 2024 – Now",
+    stack: "Next.js, Clerk, React, Neon, Drizzle ORM",
+    text: "An AI learning platform with sign-in, course management and video lessons. I also wrote a research paper and case study on AI in education and presented it to 400+ students." },
+  {
+    name: "Relief Route",
+    when: "Jul 2024 - Nov 2024",
+    stack: "Groq, Google Maps API, React",
+    text: "Finds nearby emergency food resources in one map, with an admin dashboard to manage 200+ unregistered pantries and track engagement." },
+  {
+    name: "Instagram Data Tracker",
+    when: "Jan 2025 – Mar 2025",
+    stack: "JavaScript, GraphQL, Fetch API",
+    text: "Pulls follower data through GraphQL endpoints and compares snapshots over time to find new followers, unfollows and one-way connections, all client-side." },
+];
