@@ -1107,6 +1107,9 @@
   line-height: 1.65;
   color: var(--muted);
 }
+.tp-root[data-theme="light"] .tp-lead {
+  color: var(--body);
+}
 .tp-lead + .tp-list {
   margin-top: calc(var(--gap) * 0.8);
 }
