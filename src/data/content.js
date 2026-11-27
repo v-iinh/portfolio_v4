@@ -2,7 +2,7 @@
 export const PROFILE = {
   name: "Vinh Tran",
   eyebrow: "Software Engineer · Northeastern",
-  words: "VINH TRAN ✦ SOFTWARE ✦ SYSTEMS ✦ ENGINEER ✦ RESEARCH ✦ DEVELOPER ✦ "
+  words: "SOFTWARE ✦ DEVELOPMENT ✦ ENGINEERING ✦ TECHNOLOGY ✦ SYSTEMS ✦ INNOVATION ✦ "
 };
 
 export const CARDS = [
