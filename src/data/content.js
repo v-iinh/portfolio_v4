@@ -19,7 +19,7 @@ export const WORK = [
   {
     role: "Software Engineer Co-op",
     org: "SPD Hospitality",
-    when: "Nov 2026 – Present",
+    when: "Nov 2026 – Now",
     text: "Developing web applications across multiple brands, optimizing for performance, user experience, and SEO. Building automation tools to streamline operational and marketing workflows."
   },
   {
@@ -31,7 +31,7 @@ export const WORK = [
   {
     role: "Information Technology Intern",
     org: "Boston Water & Sewer Commission",
-    when: "Jul – Sep 2026",
+    when: "Jul 2026 – Sep 2026",
     text: "Provided technical troubleshooting and network monitoring support. Modernized a legacy GIS dashboard and automated inventory tracking, reducing hours of manual asset management."
   },
   {
@@ -45,17 +45,17 @@ export const WORK = [
 export const PROJECTS = [
   {
     name: "Socratic",
-    when: "Dec 2024 – now",
+    when: "Dec 2024 – Now",
     stack: "Next.js, Clerk, React, Neon, Drizzle ORM",
     text: "An AI learning platform with sign-in, course management and video lessons. I also wrote a research paper and case study on AI in education and presented it to 400+ students." },
   {
     name: "Relief Route",
-    when: "2024",
+    when: "Jul 2024 - Nov 2024",
     stack: "Groq, Google Maps API, React",
     text: "Finds nearby emergency food resources in one map, with an admin dashboard to manage 200+ unregistered pantries and track engagement." },
   {
     name: "Instagram Data Tracker",
-    when: "Jan – Mar 2025",
+    when: "Jan 2025 – Mar 2025",
     stack: "JavaScript, GraphQL, Fetch API",
     text: "Pulls follower data through GraphQL endpoints and compares snapshots over time to find new followers, unfollows and one-way connections, all client-side." },
 ];

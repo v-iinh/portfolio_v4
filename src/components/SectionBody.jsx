@@ -44,6 +44,7 @@ export function SectionBody({ id }) {
         <Entry title="Email"><p><a href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a></p></Entry>
         <Entry title="LinkedIn"><p><a href={PROFILE.linkedin} target="_blank" rel="noreferrer">{PROFILE.linkedin}</a></p></Entry>
         <Entry title="GitHub"><p><a href={PROFILE.github} target="_blank" rel="noreferrer">{PROFILE.github}</a></p></Entry>
+        <Entry title="Resume"><p><a href="/resume.pdf" target="_blank" rel="noreferrer">Download PDF</a></p></Entry>
       </ul>
     </>
   );
