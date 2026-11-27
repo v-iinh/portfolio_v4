@@ -1166,6 +1166,9 @@
   padding-bottom: 2px;
   transition: background-size 0.6s var(--ease);
 }
+.tp-root[data-theme="dark"] .tp-list a {
+  color: var(--muted);
+}
 .tp-entry a:hover {
   background-size: 100% 1px;
 }
