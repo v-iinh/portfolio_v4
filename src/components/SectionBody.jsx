@@ -1,5 +1,5 @@
 // The pages printed on the back of each card: one quiet column of entries.
-import { ABOUT, EDUCATION, PROFILE, WORK, PROJECTS } from "../data/content.js";
+import { ABOUT, EDUCATION, WORK, PROJECTS, CONTACT } from "../data/content.js";
 
 export function Entry({ title, sub, meta, children }) {
   return (
@@ -29,7 +29,7 @@ export function SectionBody({ id }) {
     <>
       <p className="tp-lead">{ABOUT.description}</p>
       <ul className="tp-list">
-        {ABOUT.content.map((a) => (<Entry key={a.category} title={a.category}><p>{a.text}</p></Entry>))}
+        {ABOUT.items.map((a) => (<Entry key={a.category} title={a.category}><p>{a.text}</p></Entry>))}
       </ul>
     </>
   );
@@ -41,9 +41,7 @@ export function SectionBody({ id }) {
   if (id === "contact") return (
     <>
       <ul className="tp-list">
-        <Entry title="Email"><p><a href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a></p></Entry>
-        <Entry title="LinkedIn"><p><a href={PROFILE.linkedin} target="_blank" rel="noreferrer">{PROFILE.linkedin}</a></p></Entry>
-        <Entry title="GitHub"><p><a href={PROFILE.github} target="_blank" rel="noreferrer">{PROFILE.github}</a></p></Entry>
+        {CONTACT.map((c) => <Entry key={c.type} title={c.type}><p><a href={c.value} target="_blank" rel="noreferrer">{c.value}</a></p></Entry>)}
         <Entry title="Resume"><p><a href="/resume.pdf" target="_blank" rel="noreferrer">Download PDF</a></p></Entry>
       </ul>
     </>

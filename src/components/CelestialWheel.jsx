@@ -1,6 +1,7 @@
 // The faint engraved wheel that turns behind the cards and on each page.
 import { T } from "../theme.js";
 import { starPoints } from "../art/shapes.js";
+import { PROFILE } from "../data/content.js";
 
 // A faint engraved celestial wheel that turns slowly behind the cards.
 export function CelestialWheel({ size = 900, className = "" }) {
@@ -10,7 +11,7 @@ export function CelestialWheel({ size = 900, className = "" }) {
     const a = (i / 120) * Math.PI * 2, l = i % 10 === 0 ? 16 : i % 5 === 0 ? 10 : 5;
     ticks.push(`M${(c + Math.cos(a) * R).toFixed(1)} ${(c + Math.sin(a) * R).toFixed(1)}L${(c + Math.cos(a) * (R - l)).toFixed(1)} ${(c + Math.sin(a) * (R - l)).toFixed(1)}`);
   }
-  const words = "VINH TRAN ✦ SOFTWARE ✦ SYSTEMS ✦ ENGINEER ✦ RESEARCH ✦ DEVELOPER ✦ ";
+  const words = PROFILE.words;
   return (
     <svg className={`tp-wheel ${className}`} viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
       <defs><path id={`tp-ring-${size}`} d={`M${c} ${c} m-${R - 34} 0 a${R - 34} ${R - 34} 0 1 1 ${2 * (R - 34)} 0 a${R - 34} ${R - 34} 0 1 1 -${2 * (R - 34)} 0`} /></defs>

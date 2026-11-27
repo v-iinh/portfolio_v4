@@ -2,9 +2,7 @@
 export const PROFILE = {
   name: "Vinh Tran",
   eyebrow: "Software Engineer · Northeastern",
-  email: "officiallyvt@gmail.com",
-  linkedin: "https://linkedin.com/in/viinh",
-  github: "https://github.com/v-iinh",
+  words: "VINH TRAN ✦ SOFTWARE ✦ SYSTEMS ✦ ENGINEER ✦ RESEARCH ✦ DEVELOPER ✦ "
 };
 
 export const CARDS = [
@@ -59,7 +57,7 @@ export const WORK = [
 
 export const ABOUT = {
   description: "I enjoy building software that is reliable and scalable. I'm always open to making new connections and expanding my technical skills, so feel free to reach out!",
-  content: [
+  items: [
     {
       category: "Languages",
       text: "Java, Python, C/C++, SQL, TypeScript, JavaScript, HTML/CSS",
@@ -90,5 +88,20 @@ export const PROJECTS = [
     name: "Instagram Data Tracker",
     when: "Jan 2025 – Mar 2025",
     stack: "JavaScript, GraphQL, Fetch API",
-    text: "Pulls follower data through GraphQL endpoints and compares snapshots over time to find new followers, unfollows and one-way connections, all client-side." },
+    text: "Pulls follower data through GraphQL endpoints and compares snapshots over time to find new followers, unfollows and one-way connections, all client-side."
+  },
+];
+
+export const CONTACT = [
+  {
+    type: "Email",
+    value:"mailto:officiallyvt@gmail.com" },
+  {
+    type: "LinkedIn",
+    value: "https://linkedin.com/in/viinh"
+  },
+  {
+    type: "GitHub",
+    value: "https://github.com/v-iinh"
+  }
 ];
