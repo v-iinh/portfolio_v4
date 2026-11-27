@@ -41,8 +41,7 @@ export function SectionBody({ id }) {
   if (id === "contact") return (
     <>
       <ul className="tp-list">
-        {CONTACT.map((c) => <Entry key={c.type} title={c.type}><p><a href={c.value} target="_blank" rel="noreferrer">{c.value}</a></p></Entry>)}
-        <Entry title="Resume"><p><a href="/resume.pdf" target="_blank" rel="noreferrer">Download PDF</a></p></Entry>
+        {CONTACT.map((c) => <Entry key={c.type} title={c.type}><p><a href={c.value} target="_blank" rel="noreferrer">{c.display}</a></p></Entry>)}
       </ul>
     </>
   );

@@ -95,13 +95,22 @@ export const PROJECTS = [
 export const CONTACT = [
   {
     type: "Email",
-    value:"mailto:officiallyvt@gmail.com" },
+    value: "mailto:officiallyvt@gmail.com",
+    display: "officiallyvt@gmail.com"
+  },
   {
     type: "LinkedIn",
-    value: "https://linkedin.com/in/viinh"
+    value: "https://linkedin.com/in/viinh",
+    display: "linkedin.com/in/viinh"
   },
   {
     type: "GitHub",
-    value: "https://github.com/v-iinh"
+    value: "https://github.com/v-iinh",
+    display: "github.com/v-iinh"
+  },
+  {
+    type: "Resume",
+    value: "/resume.pdf",
+    display: "Download PDF"
   }
 ];
